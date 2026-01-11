@@ -22,8 +22,8 @@ const Home = () => {
         description="Domelza Constructions - Building dreams into reality with excellence in Civil, Interiors, and Infrastructure projects."
         canonical="https://domelza.com/"
       />
-      <div className="min-h-screen pt-16">
-        <div className="h-[calc(100vh-4rem)] flex flex-col lg:flex-row relative overflow-hidden">
+      <div className="min-h-screen">
+        <div className="h-screen flex flex-col lg:flex-row relative overflow-hidden">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{
