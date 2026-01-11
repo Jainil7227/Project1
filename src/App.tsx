@@ -16,7 +16,7 @@ function App() {
   return (
     <HelmetProvider>
       <Router>
-        <div className="min-h-screen bg-white flex flex-col">
+        <div className="min-h-screen bg-white flex flex-col overflow-x-hidden">
           <Navigation />
           <Suspense fallback={
             <div className="flex items-center justify-center min-h-screen">

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, Building2, Paintbrush } from 'lucide-react';
@@ -7,6 +7,13 @@ import SEO from '../components/SEO';
 
 const Home = () => {
   const [hoveredSide, setHoveredSide] = useState<'civil' | 'interior' | null>(null);
+  const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 1024);
+
+  useEffect(() => {
+    const handleResize = () => setIsLargeScreen(window.innerWidth >= 1024);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <>
@@ -15,18 +22,19 @@ const Home = () => {
         description="Domelza Constructions - Building dreams into reality with excellence in Civil, Interiors, and Infrastructure projects."
         canonical="https://domelza.com/"
       />
-      <div className="min-h-screen">
-        <div className="h-screen flex flex-col lg:flex-row relative overflow-hidden">
+      <div className="min-h-screen pt-16">
+        <div className="h-[calc(100vh-4rem)] flex flex-col lg:flex-row relative overflow-hidden">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{
               opacity: hoveredSide === 'interior' ? 0.4 : 1,
-              width: hoveredSide === 'civil' ? '70%' : hoveredSide === 'interior' ? '30%' : '50%',
+              width: isLargeScreen ? (hoveredSide === 'civil' ? '70%' : hoveredSide === 'interior' ? '30%' : '50%') : '100%',
+              height: isLargeScreen ? '100%' : '50%',
             }}
             transition={{ duration: 0.6, ease: 'easeInOut' }}
-            onMouseEnter={() => setHoveredSide('civil')}
+            onMouseEnter={() => isLargeScreen && setHoveredSide('civil')}
             onMouseLeave={() => setHoveredSide(null)}
-            className="relative h-1/2 lg:h-full lg:w-1/2 group cursor-pointer"
+            className="relative group cursor-pointer"
           >
             <div
               className="absolute inset-0 bg-cover bg-center"
@@ -44,18 +52,18 @@ const Home = () => {
                 transition={{ delay: 0.3, duration: 0.8 }}
                 className="text-center"
               >
-                <Building2 size={64} className="mx-auto mb-6 opacity-90" strokeWidth={1.5} />
-                <h2 className="text-5xl lg:text-7xl font-display font-bold mb-4 tracking-tight">
+                <Building2 size={48} className="mx-auto mb-4 opacity-90 lg:w-16 lg:h-16" strokeWidth={1.5} />
+                <h2 className="text-4xl lg:text-7xl font-display font-bold mb-3 lg:mb-4 tracking-tight">
                   Building the Future
                 </h2>
-                <p className="text-lg lg:text-xl font-light mb-8 max-w-md mx-auto leading-relaxed opacity-90">
+                <p className="text-base lg:text-xl font-light mb-6 lg:mb-8 max-w-md mx-auto leading-relaxed opacity-90">
                   Engineering precision meets architectural innovation in every structure we create
                 </p>
                 <Link
                   to="/civil"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/30 rounded-full hover:bg-white/20 transition-all duration-300 group/btn"
+                  className="inline-flex items-center gap-2 px-6 py-3 lg:px-8 lg:py-4 bg-white/10 backdrop-blur-sm border border-white/30 rounded-full hover:bg-white/20 transition-all duration-300 group/btn"
                 >
-                  <span className="font-medium tracking-wider">EXPLORE CIVIL</span>
+                  <span className="font-medium tracking-wider text-sm lg:text-base">EXPLORE CIVIL</span>
                   <ArrowRight size={20} className="group-hover/btn:translate-x-1 transition-transform" />
                 </Link>
               </motion.div>
@@ -66,12 +74,13 @@ const Home = () => {
             initial={{ opacity: 0 }}
             animate={{
               opacity: hoveredSide === 'civil' ? 0.4 : 1,
-              width: hoveredSide === 'interior' ? '70%' : hoveredSide === 'civil' ? '30%' : '50%',
+              width: isLargeScreen ? (hoveredSide === 'interior' ? '70%' : hoveredSide === 'civil' ? '30%' : '50%') : '100%',
+              height: isLargeScreen ? '100%' : '50%',
             }}
             transition={{ duration: 0.6, ease: 'easeInOut' }}
-            onMouseEnter={() => setHoveredSide('interior')}
+            onMouseEnter={() => isLargeScreen && setHoveredSide('interior')}
             onMouseLeave={() => setHoveredSide(null)}
-            className="relative h-1/2 lg:h-full lg:w-1/2 group cursor-pointer"
+            className="relative group cursor-pointer"
           >
             <div
               className="absolute inset-0 bg-cover bg-center"
@@ -89,18 +98,18 @@ const Home = () => {
                 transition={{ delay: 0.5, duration: 0.8 }}
                 className="text-center"
               >
-                <Paintbrush size={64} className="mx-auto mb-6 opacity-90" strokeWidth={1.5} />
-                <h2 className="text-5xl lg:text-7xl font-display font-bold mb-4 tracking-tight">
+                <Paintbrush size={48} className="mx-auto mb-4 opacity-90 lg:w-16 lg:h-16" strokeWidth={1.5} />
+                <h2 className="text-4xl lg:text-7xl font-display font-bold mb-3 lg:mb-4 tracking-tight">
                   Crafting the Soul
                 </h2>
-                <p className="text-lg lg:text-xl font-light mb-8 max-w-md mx-auto leading-relaxed opacity-90">
+                <p className="text-base lg:text-xl font-light mb-6 lg:mb-8 max-w-md mx-auto leading-relaxed opacity-90">
                   Transforming spaces into timeless expressions of luxury and refined living
                 </p>
                 <Link
                   to="/interiors"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/30 rounded-full hover:bg-white/20 transition-all duration-300 group/btn"
+                  className="inline-flex items-center gap-2 px-6 py-3 lg:px-8 lg:py-4 bg-white/10 backdrop-blur-sm border border-white/30 rounded-full hover:bg-white/20 transition-all duration-300 group/btn"
                 >
-                  <span className="font-medium tracking-wider">EXPLORE INTERIORS</span>
+                  <span className="font-medium tracking-wider text-sm lg:text-base">EXPLORE INTERIORS</span>
                   <ArrowRight size={20} className="group-hover/btn:translate-x-1 transition-transform" />
                 </Link>
               </motion.div>
