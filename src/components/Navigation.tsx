@@ -31,11 +31,10 @@ const Navigation = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
           ? 'bg-white/95 backdrop-blur-md shadow-lg'
-          : 'bg-transparent'
-      }`}
+          : 'bg-black/30 backdrop-blur-sm'
+        }`}
     >
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
@@ -44,13 +43,12 @@ const Navigation = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`text-sm font-medium tracking-wider transition-colors duration-300 hover:text-interior-gold ${
-                  location.pathname === link.path
+                className={`text-sm font-medium tracking-wider transition-colors duration-300 hover:text-interior-gold ${location.pathname === link.path
                     ? 'text-interior-gold'
                     : isScrolled
-                    ? 'text-graphite'
-                    : 'text-white'
-                }`}
+                      ? 'text-graphite'
+                      : 'text-white'
+                  }`}
               >
                 {link.name.toUpperCase()}
               </Link>
@@ -59,9 +57,8 @@ const Navigation = () => {
 
           <Link
             to="/"
-            className={`text-3xl font-display font-bold tracking-widest transition-colors duration-300 ${
-              isScrolled ? 'text-graphite' : 'text-white'
-            }`}
+            className={`text-3xl font-display font-bold tracking-widest transition-colors duration-300 ${isScrolled ? 'text-graphite' : 'text-white'
+              }`}
           >
             DOMELZA
           </Link>
@@ -71,13 +68,12 @@ const Navigation = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`text-sm font-medium tracking-wider transition-colors duration-300 hover:text-interior-gold ${
-                  location.pathname === link.path
+                className={`text-sm font-medium tracking-wider transition-colors duration-300 hover:text-interior-gold ${location.pathname === link.path
                     ? 'text-interior-gold'
                     : isScrolled
-                    ? 'text-graphite'
-                    : 'text-white'
-                }`}
+                      ? 'text-graphite'
+                      : 'text-white'
+                  }`}
               >
                 {link.name.toUpperCase()}
               </Link>
@@ -86,9 +82,8 @@ const Navigation = () => {
 
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className={`lg:hidden transition-colors duration-300 ${
-              isScrolled ? 'text-graphite' : 'text-white'
-            }`}
+            className={`lg:hidden transition-colors duration-300 ${isScrolled ? 'text-graphite' : 'text-white'
+              }`}
           >
             {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
@@ -109,11 +104,10 @@ const Navigation = () => {
                   key={link.path}
                   to={link.path}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`text-lg font-medium tracking-wider transition-colors duration-300 hover:text-interior-gold ${
-                    location.pathname === link.path
+                  className={`text-lg font-medium tracking-wider transition-colors duration-300 hover:text-interior-gold ${location.pathname === link.path
                       ? 'text-interior-gold'
                       : 'text-graphite'
-                  }`}
+                    }`}
                 >
                   {link.name.toUpperCase()}
                 </Link>
